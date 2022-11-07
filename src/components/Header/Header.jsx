@@ -20,13 +20,11 @@ const Header = () => {
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-        <Link to="/" active={true}>
-          Home
-        </Link>
-        <Navbar.Link href="/navbars">About</Navbar.Link>
-        <Navbar.Link href="/navbars">Services</Navbar.Link>
-        <Navbar.Link href="/navbars">Pricing</Navbar.Link>
-        <Navbar.Link href="/navbars">Contact</Navbar.Link>
+        <Link to="/">Home</Link>
+        <Link href="/navbars">About</Link>
+        <Link href="/navbars">Services</Link>
+        <Link href="/navbars">Pricing</Link>
+        <Link href="/navbars">Contact</Link>
       </Navbar.Collapse>
     </Navbar>
   );
