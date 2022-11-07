@@ -2,9 +2,9 @@ import { Button } from "flowbite-react";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Slider from "../Header/Slider";
-import Services from "../Services/Services";
+import Service from "../Services/Service";
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -27,10 +27,13 @@ const Home = () => {
         <h1 className="text-5xl text-center">My Services</h1>
         <div className="grid grid-cols-3 gap-4 m-5">
           {services.map((service) => (
-            <Services key={service._id} service={service} />
+            <Service key={service._id} service={service} />
           ))}
         </div>
-        <Button className="mx-auto">See All</Button>
+        <Link to="/services">
+          {" "}
+          <Button className="mx-auto">See All</Button>
+        </Link>
       </div>
     </div>
   );
