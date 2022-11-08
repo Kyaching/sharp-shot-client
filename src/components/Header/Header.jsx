@@ -1,15 +1,18 @@
 import React from "react";
 import { Avatar, Button, Navbar } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const Header = () => {
   const { user, userSignOut } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const signOut = () => {
     userSignOut()
-      .then()
+      .then(() => {
+        navigate("/");
+      })
       .catch((err) => console.log(err));
   };
 
