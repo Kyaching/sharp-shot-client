@@ -3,47 +3,56 @@ import React from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
+import { useForm } from "react-hook-form";
 
 const SignUp = () => {
   const { createUser } = useContext(AuthContext);
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => {
+    const { name, email, password } = data;
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((err) => console.error(err));
+  };
   return (
     <div className="max-w-sm mx-auto my-8">
       <Card>
         <div className="mb-4 text-center">
           <h1 className="text-4xl font-bold">Sign Up</h1>
         </div>
-        <form className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <div>
             <div className="mb-2 block">
-              <Label htmlFor="email1" value="Your Name" />
+              <Label htmlFor="name" value="Your Name" />
             </div>
             <TextInput
-              id="email1"
-              type="name"
+              {...register("name", { required: true })}
+              id="name"
               placeholder="Your Name"
-              required={true}
             />
           </div>
           <div>
             <div className="mb-2 block">
-              <Label htmlFor="email1" value="Your email" />
+              <Label htmlFor="email" value="Your email" />
             </div>
             <TextInput
-              id="email1"
+              {...register("email", { required: true })}
+              id="email"
               type="email"
               placeholder="example@example.example"
-              required={true}
             />
           </div>
           <div>
             <div className="mb-2 block">
-              <Label htmlFor="password1" value="Your password" />
+              <Label htmlFor="password" value="Your password" />
             </div>
             <TextInput
-              id="password1"
-              type="password"
+              {...register("password", { required: true })}
+              id="password"
               placeholder="Your Password"
-              required={true}
             />
           </div>
           <Button type="submit">Sign Up</Button>
