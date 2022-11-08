@@ -1,9 +1,13 @@
 import { Card, Table } from "flowbite-react";
 import React from "react";
+import { Helmet } from "react-helmet-async";
 
 const Blog = () => {
   return (
     <div className="w-1/2 mx-auto">
+      <Helmet>
+        <title>Blog</title>
+      </Helmet>
       <h2 className="text-3xl text-center font-semibold">My Blog</h2>
       <Card className="my-8">
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">

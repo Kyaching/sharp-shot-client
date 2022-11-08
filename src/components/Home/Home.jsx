@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Slider from "../Header/Slider";
 import Service from "../Services/Service";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -22,6 +23,9 @@ const Home = () => {
   }, [page]);
   return (
     <div>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
       <Slider />
       <div>
         <h1 className="text-5xl text-center">My Services</h1>

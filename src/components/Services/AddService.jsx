@@ -2,6 +2,7 @@ import { Button, Label, Textarea } from "flowbite-react";
 import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const AddServices = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -36,6 +37,9 @@ const AddServices = () => {
   };
   return (
     <div className="mx-auto w-3/4 xl:px-8 my-10">
+      <Helmet>
+        <title>Add Service</title>
+      </Helmet>
       <div className="bg-white rounded shadow-2xl p-7 sm:p-10">
         <h3 className="mb-4 text-xl font-semibold sm:text-center sm:mb-6 sm:text-2xl">
           Add Your Services

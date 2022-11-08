@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { Helmet } from "react-helmet-async";
 
 const AddReview = ({ user, id, service }) => {
   const { register, handleSubmit } = useForm();
@@ -31,6 +32,9 @@ const AddReview = ({ user, id, service }) => {
   };
   return (
     <div>
+      <Helmet>
+        <title>Add Review</title>
+      </Helmet>
       <div className="flex flex-col max-w-xl mx-auto p-8 shadow-sm rounded-xl lg:p-12 bg-gray-900 text-gray-100">
         <div className="flex flex-col items-center w-full">
           <h2 className="text-3xl font-semibold text-center">

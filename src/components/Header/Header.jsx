@@ -20,12 +20,12 @@ const Header = () => {
     <Navbar fluid={true} rounded={true}>
       <Navbar.Brand href="https://flowbite.com/">
         <img
-          src="https://flowbite.com/docs/images/logo.svg"
+          src="https://img.freepik.com/free-photo/digital-camera-shoot-photo-icon_53876-14250.jpg?w=740&t=st=1667929909~exp=1667930509~hmac=a9ea04e28d794c9a94d04fa5750774dcab4c840b9e31a68e9886881ad9609231"
           className="mr-3 h-6 sm:h-9"
           alt="Flowbite Logo"
         />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          Flowbite
+          Sharp Shot
         </span>
       </Navbar.Brand>
       <div className="flex md:order-2">

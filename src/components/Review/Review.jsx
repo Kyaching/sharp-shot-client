@@ -7,6 +7,7 @@ import AddReview from "./AddReview";
 import UserReview from "./UserReview";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 
 const Review = ({ id, service }) => {
   const { user } = useContext(AuthContext);
@@ -19,6 +20,9 @@ const Review = ({ id, service }) => {
   }, [id]);
   return (
     <div>
+      <Helmet>
+        <title>Review</title>
+      </Helmet>
       <div className="relative">
         <h1 className="text-5xl text-center my-6">User Review</h1>
         {!user?.uid && (

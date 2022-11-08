@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const SignUp = () => {
   const { createUser, profileUpdate } = useContext(AuthContext);
@@ -44,6 +45,9 @@ const SignUp = () => {
   };
   return (
     <div className="max-w-sm mx-auto my-8">
+      <Helmet>
+        <title>SignUp</title>
+      </Helmet>
       <Card>
         <div className="mb-2 text-center">
           <h1 className="text-4xl font-bold">Sign Up</h1>

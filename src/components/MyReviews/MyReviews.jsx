@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const MyReviews = () => {
   const { user } = useContext(AuthContext);
@@ -32,6 +33,9 @@ const MyReviews = () => {
 
   return (
     <div className="w-9/12 mx-auto my-20">
+      <Helmet>
+        <title>My Review</title>
+      </Helmet>
       {reviews.length ? (
         <Table>
           <Table.Head>

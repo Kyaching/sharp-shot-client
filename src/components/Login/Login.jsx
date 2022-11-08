@@ -1,15 +1,18 @@
 import { Button, Card, Label, TextInput } from "flowbite-react";
 import React from "react";
 import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const { userLogin, signInWithGoogle } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const onSubmit = (data) => {
     const { email, password } = data;
     userLogin(email, password)
@@ -18,7 +21,7 @@ const Login = () => {
         if (user) {
           toast.success("Successfully logged in");
         }
-        navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((err) => toast.error(err.message));
     console.log(data);
@@ -36,12 +39,12 @@ const Login = () => {
   };
   return (
     <div className="max-w-sm mx-auto my-8">
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
       <Card>
         <div className="mb-4 text-center">
           <h1 className="text-4xl font-bold">Log In</h1>
-          <p className="text-sm dark:text-gray-400">
-            Log in to access your account
-          </p>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <div>
