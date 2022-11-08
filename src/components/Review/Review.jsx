@@ -8,15 +8,15 @@ import UserReview from "./UserReview";
 import { useState } from "react";
 import { useEffect } from "react";
 
-const Review = ({ id }) => {
+const Review = ({ id, service }) => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/reviews")
+    fetch(`http://localhost:5000/reviews?serviceId=${id}`)
       .then((res) => res.json())
       .then((data) => setReviews(data.data));
-  }, []);
+  }, [id]);
   return (
     <div>
       <div className="relative">
@@ -37,7 +37,7 @@ const Review = ({ id }) => {
       {user?.uid && (
         <h2 className="text-5xl text-center my-6">Add Your review</h2>
       )}
-      {user?.uid && <AddReview user={user} id={id} />}
+      {user?.uid && <AddReview user={user} id={id} service={service} />}
     </div>
   );
 };

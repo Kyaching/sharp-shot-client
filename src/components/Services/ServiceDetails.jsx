@@ -55,7 +55,7 @@ const ServiceDetails = () => {
           </div>
         </div>
       </div>
-      <Review id={_id} />
+      <Review id={_id} service={service.data} />
     </div>
   );
 };

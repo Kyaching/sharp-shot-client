@@ -2,9 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-const AddReview = ({ user, id }) => {
+const AddReview = ({ user, id, service }) => {
   const { register, handleSubmit } = useForm();
   const { displayName, email, photoURL } = user;
+  const { name, price, rating } = service;
+  console.log(service);
   const onSubmit = (data) => {
     const reviews = {
       name: displayName,
@@ -12,6 +14,9 @@ const AddReview = ({ user, id }) => {
       serviceId: id,
       img: photoURL,
       review: data.review,
+      serviceName: name,
+      price,
+      rating,
     };
     fetch("http://localhost:5000/reviews", {
       method: "POST",

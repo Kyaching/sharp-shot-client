@@ -1,5 +1,6 @@
 import React from "react";
 import { useContext } from "react";
+import { Navigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider/AuthProvider";
 
 const PrivateRoute = ({ children }) => {
@@ -7,7 +8,7 @@ const PrivateRoute = ({ children }) => {
   if (user) {
     return children;
   }
-  return <div>{children}</div>;
+  return <Navigate to="/"></Navigate>;
 };
 
 export default PrivateRoute;
