@@ -1,7 +1,7 @@
 import { Button, Card, Label, TextInput } from "flowbite-react";
 import React from "react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 const SignUp = () => {
   const { createUser, profileUpdate } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
   const onSubmit = (data) => {
     const { name, photo, email, password } = data;
     console.log(data);
@@ -20,6 +21,7 @@ const SignUp = () => {
           updateProfile(name, photo);
           toast.success("Account Created Successfully");
         }
+        navigate("/");
         console.log(user);
       })
       .catch((err) => {

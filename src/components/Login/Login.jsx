@@ -1,7 +1,7 @@
 import { Button, Card, Label, TextInput } from "flowbite-react";
 import React from "react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 const Login = () => {
   const { userLogin, signInWithGoogle } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
   const onSubmit = (data) => {
     const { email, password } = data;
     userLogin(email, password)
@@ -16,8 +17,8 @@ const Login = () => {
         const user = result.user;
         if (user) {
           toast.success("Successfully logged in");
-          console.log(user);
         }
+        navigate("/");
       })
       .catch((err) => toast.error(err.message));
     console.log(data);

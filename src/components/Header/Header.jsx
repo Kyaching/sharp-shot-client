@@ -47,7 +47,13 @@ const Header = () => {
         <Link to="/">Home</Link>
         <Link to="/services">Services</Link>
         <Link to="/blog">Blog</Link>
-        <Link href="/navbars">Contact</Link>
+        {user?.uid && (
+          <>
+            {" "}
+            <Link to="/review">My Reviews</Link>
+            <Link to="/addservice">Add Service</Link>
+          </>
+        )}
       </Navbar.Collapse>
     </Navbar>
   );
