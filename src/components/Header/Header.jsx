@@ -50,7 +50,7 @@ const Header = () => {
         {user?.uid && (
           <>
             {" "}
-            <Link to="/review">My Reviews</Link>
+            <Link to="/myreviews">My Reviews</Link>
             <Link to="/addservice">Add Service</Link>
           </>
         )}
