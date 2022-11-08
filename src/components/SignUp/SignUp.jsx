@@ -1,8 +1,11 @@
 import { Button, Card, Label, TextInput } from "flowbite-react";
 import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const SignUp = () => {
+  const { createUser } = useContext(AuthContext);
   return (
     <div className="max-w-sm mx-auto my-8">
       <Card>
