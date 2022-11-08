@@ -1,12 +1,18 @@
 import { Card } from "flowbite-react";
 import React from "react";
 import { Link } from "react-router-dom";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
 
 const Service = ({ service }) => {
   const { name, img, price, rating, description } = service;
   return (
     <Card>
-      <img className="w-96 h-80 rounded" src={img} alt="" />
+      <PhotoProvider>
+        <PhotoView src={img}>
+          <img className="w-96 h-80 rounded" src={img} alt="" />
+        </PhotoView>
+      </PhotoProvider>
 
       <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
         {name}
