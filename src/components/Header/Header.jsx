@@ -1,8 +1,18 @@
 import React from "react";
 import { Avatar, Button, Navbar } from "flowbite-react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const Header = () => {
+  const { user, userSignOut } = useContext(AuthContext);
+
+  const signOut = () => {
+    userSignOut()
+      .then()
+      .catch((err) => console.log(err));
+  };
+
   return (
     <Navbar fluid={true} rounded={true}>
       <Navbar.Brand href="https://flowbite.com/">
@@ -16,16 +26,21 @@ const Header = () => {
         </span>
       </Navbar.Brand>
       <div className="flex md:order-2">
-        <Link to="/login">
-          <Button>Log In</Button>
-        </Link>
-        <Link to="/signup">
-          <Button>Sign Up</Button>
-        </Link>
-        <Avatar
-          img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-          rounded={true}
-        />
+        {user?.uid ? (
+          <Button onClick={signOut} className="mr-4">
+            Sign Out
+          </Button>
+        ) : (
+          <div className="flex">
+            <Link to="/login">
+              <Button>Log In</Button>
+            </Link>
+            <Link to="/signup">
+              <Button className="mx-5">Sign Up</Button>
+            </Link>
+          </div>
+        )}
+        {user?.uid && <Avatar img={user?.photoURL} rounded={true} />}
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>

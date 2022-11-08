@@ -1,8 +1,38 @@
 import { Button, Card, Label, TextInput } from "flowbite-react";
 import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const Login = () => {
+  const { userLogin, signInWithGoogle } = useContext(AuthContext);
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => {
+    const { email, password } = data;
+    userLogin(email, password)
+      .then((result) => {
+        const user = result.user;
+        if (user) {
+          toast.success("Successfully logged in");
+          console.log(user);
+        }
+      })
+      .catch((err) => toast.error(err.message));
+    console.log(data);
+  };
+  const googleSignIn = () => {
+    signInWithGoogle()
+      .then((result) => {
+        const user = result.user;
+        if (user) {
+          toast.success("Successfully Logged In");
+          console.log(user);
+        }
+      })
+      .catch((err) => console.error(err));
+  };
   return (
     <div className="max-w-sm mx-auto my-8">
       <Card>
@@ -12,23 +42,27 @@ const Login = () => {
             Log in to access your account
           </p>
         </div>
-        <form className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <div>
             <div className="mb-2 block">
-              <Label htmlFor="email1" value="Your email" />
+              <Label htmlFor="email" value="Your email" />
             </div>
             <TextInput
-              id="email1"
+              {...register("email", { required: true })}
+              id="email"
               type="email"
-              placeholder="name@flowbite.com"
-              required={true}
+              placeholder="user@example.com"
             />
           </div>
           <div>
             <div className="mb-2 block">
-              <Label htmlFor="password1" value="Your password" />
+              <Label htmlFor="password" value="Your password" />
             </div>
-            <TextInput id="password1" type="password" required={true} />
+            <TextInput
+              {...register("password", { required: true })}
+              id="password"
+              type="password"
+            />
           </div>
           <Button type="submit">Submit</Button>
         </form>
@@ -41,6 +75,7 @@ const Login = () => {
         </div>
         <div className="my-3 space-y-4">
           <button
+            onClick={googleSignIn}
             aria-label="Login with Google"
             type="button"
             className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-400 focus:ring-violet-400"

@@ -4,28 +4,51 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, profileUpdate } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    const { name, email, password } = data;
+    const { name, photo, email, password } = data;
+    console.log(data);
     createUser(email, password)
       .then((result) => {
         const user = result.user;
+
+        if (user) {
+          updateProfile(name, photo);
+          toast.success("Account Created Successfully");
+        }
         console.log(user);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        toast.error(`Sorry ${err.message}`);
+        console.error(err.message);
+      });
+  };
+  const updateProfile = (name, photo) => {
+    const profile = {
+      displayName: name,
+      photoURL: photo,
+    };
+    profileUpdate(profile)
+      .then(() => {
+        if (profile) {
+          toast.success("Profile Updated");
+        }
+      })
+      .catch((err) => toast.error(err.message));
   };
   return (
     <div className="max-w-sm mx-auto my-8">
       <Card>
-        <div className="mb-4 text-center">
+        <div className="mb-2 text-center">
           <h1 className="text-4xl font-bold">Sign Up</h1>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <div>
-            <div className="mb-2 block">
+            <div className="mb-1 block">
               <Label htmlFor="name" value="Your Name" />
             </div>
             <TextInput
@@ -35,7 +58,17 @@ const SignUp = () => {
             />
           </div>
           <div>
-            <div className="mb-2 block">
+            <div className="mb-1 block">
+              <Label htmlFor="photo" value="Your Photo" />
+            </div>
+            <TextInput
+              {...register("photo")}
+              id="photo"
+              placeholder="Photo Link"
+            />
+          </div>
+          <div>
+            <div className="mb-1 block">
               <Label htmlFor="email" value="Your email" />
             </div>
             <TextInput
@@ -46,7 +79,7 @@ const SignUp = () => {
             />
           </div>
           <div>
-            <div className="mb-2 block">
+            <div className="mb-1 block">
               <Label htmlFor="password" value="Your password" />
             </div>
             <TextInput
