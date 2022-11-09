@@ -10,14 +10,27 @@ import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 
 const Review = ({ id, service }) => {
-  const { user } = useContext(AuthContext);
+  const { user, userSignOut } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?serviceId=${id}`)
-      .then((res) => res.json())
-      .then((data) => setReviews(data.data));
-  }, [id]);
+    fetch(`http://localhost:5000/reviews?serviceId=${id}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          return userSignOut();
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setReviews(data.data);
+        console.log(data);
+      })
+      .catch((err) => console.error(err));
+  }, [id, userSignOut]);
   return (
     <div>
       <Helmet>

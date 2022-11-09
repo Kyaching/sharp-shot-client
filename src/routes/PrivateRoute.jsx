@@ -10,17 +10,12 @@ const PrivateRoute = ({ children }) => {
 
   if (loading) {
     return (
-      <div className="flex flex-wrap gap-2">
-        <Spinner color="info" aria-label="Info spinner example" />
-        <Spinner color="success" aria-label="Success spinner example" />
-        <Spinner color="failure" aria-label="Failure spinner example" />
-        <Spinner color="warning" aria-label="Warning spinner example" />
-        <Spinner color="pink" aria-label="Pink spinner example" />
-        <Spinner color="purple" aria-label="Purple spinner example" />
+      <div className="flex justify-center items-center mx-auto h-96">
+        <Spinner aria-label="Warning spinner example" size="xl" />
       </div>
     );
   }
-  if (user?.uid) {
+  if (user && user?.uid) {
     return children;
   }
   return <Navigate to="/login" state={{ from: location }} replace />;
