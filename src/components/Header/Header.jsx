@@ -17,7 +17,7 @@ const Header = () => {
   };
 
   return (
-    <Navbar fluid={true} rounded={true}>
+    <Navbar className="shadow-lg" fluid={true} rounded={true}>
       <Navbar.Brand href="https://flowbite.com/">
         <img
           src="https://img.freepik.com/free-photo/digital-camera-shoot-photo-icon_53876-14250.jpg?w=740&t=st=1667929909~exp=1667930509~hmac=a9ea04e28d794c9a94d04fa5750774dcab4c840b9e31a68e9886881ad9609231"

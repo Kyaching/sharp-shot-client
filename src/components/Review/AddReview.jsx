@@ -2,9 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
+import toast from "react-hot-toast";
+import { Button, Card, Modal, Textarea } from "flowbite-react";
 
 const AddReview = ({ user, id, service }) => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const { displayName, email, photoURL } = user;
   const { name, price, rating } = service;
   console.log(service);
@@ -27,51 +29,35 @@ const AddReview = ({ user, id, service }) => {
       body: JSON.stringify(reviews),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.error(err));
+      .then((data) => {
+        reset();
+        toast.success("Added Review Successfully");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
   return (
-    <div>
-      <Helmet>
-        <title>Add Review</title>
-      </Helmet>
-      <div className="flex flex-col max-w-xl mx-auto p-8 shadow-sm rounded-xl lg:p-12 bg-gray-900 text-gray-100">
-        <div className="flex flex-col items-center w-full">
-          <h2 className="text-3xl font-semibold text-center">
-            Your opinion matters!
-          </h2>
-          <div className="flex flex-col items-center py-6 space-y-3">
-            <span className="text-center">How was your experience?</span>
-          </div>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col w-full"
-          >
-            <textarea
-              {...register("review", { required: true })}
-              rows="3"
-              placeholder="Your review..."
-              className="p-4 rounded-md resize-none text-gray-100 bg-gray-900"
-            ></textarea>
-            <button
-              type="submit"
-              className="py-4 my-8 font-semibold rounded-md text-gray-900 bg-violet-400"
-            >
-              Leave Review Here
-            </button>
-          </form>
+    <Card className="my-16" size="md">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="space-y-6 px-6 pb-4 sm:pb-6 lg:px-8 xl:pb-8 w-full"
+      >
+        <h3 className="text-xl font-medium text-gray-900 dark:text-white text-center">
+          Add Your review
+        </h3>
+
+        <Textarea
+          {...register("review", { required: true })}
+          placeholder="Leave a review here..."
+          rows={4}
+        />
+
+        <div className="flex justify-center">
+          <Button type="submit">Save</Button>
         </div>
-        <div className="flex items-center justify-center">
-          <Link
-            rel="noopener noreferrer"
-            href="#"
-            className="text-sm text-gray-400"
-          >
-            Maybe later
-          </Link>
-        </div>
-      </div>
-    </div>
+      </form>
+    </Card>
   );
 };
 

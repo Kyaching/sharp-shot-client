@@ -6,7 +6,7 @@ const UserReview = ({ userReviews }) => {
   return (
     <div className="container flex flex-col w-full max-w-lg p-6 mx-auto divide-y rounded-md border-2 divide-gray-700 text-gray-900">
       <Helmet>
-        <title>UserReview</title>
+        <title>User Review</title>
       </Helmet>
       <div className="flex justify-between p-4">
         <div className="flex space-x-4">

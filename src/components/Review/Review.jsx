@@ -12,6 +12,7 @@ import { Helmet } from "react-helmet-async";
 const Review = ({ id, service }) => {
   const { user, userSignOut } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     fetch(`http://localhost:5000/reviews?serviceId=${id}`, {
@@ -26,11 +27,12 @@ const Review = ({ id, service }) => {
         return res.json();
       })
       .then((data) => {
+        setRefresh(!refresh);
         setReviews(data.data);
         console.log(data);
       })
       .catch((err) => console.error(err));
-  }, [id, userSignOut]);
+  }, [id, userSignOut, refresh]);
   return (
     <div>
       <Helmet>
@@ -51,9 +53,6 @@ const Review = ({ id, service }) => {
           <UserReview key={review._id} userReviews={review} />
         ))}
       </div>
-      {user?.uid && (
-        <h2 className="text-5xl text-center my-6">Add Your review</h2>
-      )}
       {user?.uid && <AddReview user={user} id={id} service={service} />}
     </div>
   );

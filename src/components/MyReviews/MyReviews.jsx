@@ -1,26 +1,35 @@
 import { Button, Modal, Spinner, Table, Textarea } from "flowbite-react";
 import React from "react";
-import { useContext } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 const MyReviews = () => {
   const { user, userSignOut } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
+  const [alert, setAlert] = useState(false);
   const [id, setId] = useState(null);
+  const [deleteId, setDeleteId] = useState(null);
+  const [refresh, setRefresh] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleAlertOpen = () => {
+    setAlert(true);
+  };
+  const handleAlertClose = () => {
+    setAlert(false);
   };
 
   const handleUpdate = (data) => {
@@ -39,7 +48,8 @@ const MyReviews = () => {
         setOpen(false);
         if (data.data.modifiedCount > 0) {
           toast.success(data.message);
-          console.log(data);
+          setRefresh(!refresh);
+          reset();
         } else {
           toast.error("Sorry try again");
         }
@@ -52,6 +62,7 @@ const MyReviews = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        setAlert(false);
         if (data.data.deletedCount) {
           toast.success("Successfully deleted Data");
           const remaining = reviews.filter((review) => review._id !== id);
@@ -76,7 +87,7 @@ const MyReviews = () => {
         setReviews(data.data);
         setLoading(false);
       });
-  }, [user?.email, userSignOut]);
+  }, [user?.email, userSignOut, refresh]);
 
   return (
     <div className="w-9/12 mx-auto my-20">
@@ -120,7 +131,10 @@ const MyReviews = () => {
                             Edit
                           </Button>
                           <Button
-                            onClick={() => handleDelete(review._id)}
+                            onClick={() => {
+                              handleAlertOpen();
+                              setDeleteId(review._id);
+                            }}
                             size="xs"
                           >
                             delete
@@ -167,6 +181,27 @@ const MyReviews = () => {
                 <Button type="submit">Save</Button>
               </div>
             </form>
+          </Modal.Body>
+        </Modal>
+      </React.Fragment>
+      <React.Fragment>
+        <Modal show={alert} size="md" popup={true} onClose={handleAlertClose}>
+          <Modal.Header />
+          <Modal.Body>
+            <div className="text-center">
+              <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+              <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                Are you sure you want to delete your review?
+              </h3>
+              <div className="flex justify-center gap-4">
+                <Button color="failure" onClick={() => handleDelete(deleteId)}>
+                  Yes, I'm sure
+                </Button>
+                <Button color="gray" onClick={handleAlertClose}>
+                  No, cancel
+                </Button>
+              </div>
+            </div>
           </Modal.Body>
         </Modal>
       </React.Fragment>
