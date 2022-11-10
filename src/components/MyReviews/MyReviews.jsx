@@ -107,6 +107,7 @@ const MyReviews = () => {
             {reviews?.length ? (
               <Table>
                 <Table.Head>
+                  <Table.HeadCell>Photo</Table.HeadCell>
                   <Table.HeadCell>Service Name</Table.HeadCell>
                   <Table.HeadCell>Review</Table.HeadCell>
                   <Table.HeadCell>Option</Table.HeadCell>

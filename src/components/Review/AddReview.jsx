@@ -1,9 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
-import { Button, Card, Modal, Textarea } from "flowbite-react";
+import { Button, Card, Textarea } from "flowbite-react";
 
 const AddReview = ({ user, id, service }) => {
   const { register, handleSubmit, reset } = useForm();
