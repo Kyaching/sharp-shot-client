@@ -40,7 +40,7 @@ const ServiceDetails = () => {
           <p className="mb-5 text-gray-800">{description}</p>
           <div className="flex items-center justify-between">
             <p className="text-3xl font-bold text-gray-900 dark:text-white">
-              ${price}
+              {`Price: $${price}`}
             </p>
             <Rating>
               <Rating.Star />
