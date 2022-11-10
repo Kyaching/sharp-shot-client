@@ -10,7 +10,7 @@ const Service = ({ service }) => {
     <Card>
       <PhotoProvider>
         <PhotoView src={img}>
-          <img className="w-96 h-80 rounded" src={img} alt="" />
+          <img className="w-96 h-80 rounded cursor-pointer" src={img} alt="" />
         </PhotoView>
       </PhotoProvider>
 

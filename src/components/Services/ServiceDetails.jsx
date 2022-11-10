@@ -1,6 +1,8 @@
 import { Rating } from "flowbite-react";
 import { useLoaderData } from "react-router-dom";
 import Review from "../Review/Review";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
 
 const ServiceDetails = () => {
   const service = useLoaderData();
@@ -9,11 +11,15 @@ const ServiceDetails = () => {
     <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
       <div className="flex flex-col max-w-screen-lg overflow-hidden bg-white border rounded shadow-sm lg:flex-row sm:mx-auto">
         <div className="relative lg:w-1/2">
-          <img
-            src={img}
-            alt=""
-            className="object-cover w-full lg:absolute h-80 lg:h-full"
-          />
+          <PhotoProvider>
+            <PhotoView src={img}>
+              <img
+                src={img}
+                alt=""
+                className="object-cover w-full lg:absolute h-80 lg:h-full cursor-pointer"
+              />
+            </PhotoView>
+          </PhotoProvider>
           <svg
             className="absolute top-0 right-0 hidden h-full text-white lg:inline-block"
             viewBox="0 0 20 104"

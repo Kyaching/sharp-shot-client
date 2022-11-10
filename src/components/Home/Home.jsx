@@ -1,4 +1,4 @@
-import { Button } from "flowbite-react";
+import { Button, Spinner } from "flowbite-react";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -9,6 +9,7 @@ import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
   let page = 3;
   useEffect(() => {
     fetch(`https://photography-review-server.vercel.app/services?page=${page}`)
@@ -16,6 +17,7 @@ const Home = () => {
       .then((data) => {
         if (data.success) {
           setServices(data.data);
+          setLoading(false);
         } else {
         }
       })
@@ -29,11 +31,17 @@ const Home = () => {
       <Slider />
       <div className="my-12">
         <h1 className="text-5xl text-center font-bold">My Services</h1>
-        <div className="grid md:grid-cols-3 gap-4 m-5">
-          {services.map((service) => (
-            <Service key={service._id} service={service} />
-          ))}
-        </div>
+        {loading ? (
+          <div className="flex justify-center items-center mx-auto h-96">
+            <Spinner aria-label="Warning spinner example" size="xl" />
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-3 gap-4 m-5">
+            {services.map((service) => (
+              <Service key={service._id} service={service} />
+            ))}
+          </div>
+        )}
         <Link to="/services">
           {" "}
           <Button className="mx-auto">See All</Button>

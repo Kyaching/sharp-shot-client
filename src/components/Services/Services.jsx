@@ -8,6 +8,7 @@ import { Spinner } from "flowbite-react";
 const Services = () => {
   const [services, setServices] = useState([]);
   const [count, setCount] = useState(0);
+
   const [loading, setLoading] = useState(true);
   let page = count;
   useEffect(() => {
@@ -23,6 +24,7 @@ const Services = () => {
       })
       .catch((err) => console.log(err));
   }, [page]);
+
   return (
     <>
       {!loading ? (

@@ -107,7 +107,6 @@ const MyReviews = () => {
             {reviews?.length ? (
               <Table>
                 <Table.Head>
-                  <Table.HeadCell>Photo</Table.HeadCell>
                   <Table.HeadCell>Service Name</Table.HeadCell>
                   <Table.HeadCell>Review</Table.HeadCell>
                   <Table.HeadCell>Option</Table.HeadCell>
@@ -122,7 +121,9 @@ const MyReviews = () => {
                         <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                           {review.serviceName}
                         </Table.Cell>
-                        <Table.Cell>{review.review}</Table.Cell>
+                        <Table.Cell className="text-gray-900">
+                          {review.review}
+                        </Table.Cell>
                         <Table.Cell>
                           <div className="flex">
                             <Button
