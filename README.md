@@ -1,6 +1,6 @@
 # Project Name : `Sharp Shot`
 
-## Live site Link:
+## Live site Link: [https://photography-review-687cc.web.app/](https://photography-review-687cc.web.app/)
 
 ## Project Details
 
@@ -25,4 +25,3 @@ This project is based on individual photographer who are willing to share his/he
 - Firebase
 - React-router-dom
 - React-Helmet
-  Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
