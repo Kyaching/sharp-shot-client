@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "flowbite-react";
+import { Button, Spinner } from "flowbite-react";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import { Link } from "react-router-dom";
@@ -13,6 +13,7 @@ const Review = ({ id, service }) => {
   const { user, userSignOut } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
   const [refresh, setRefresh] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(
@@ -32,7 +33,7 @@ const Review = ({ id, service }) => {
       .then((data) => {
         setRefresh(!refresh);
         setReviews(data.data);
-        console.log(data);
+        setLoading(false);
       })
       .catch((err) => console.error(err));
   }, [id, userSignOut, refresh]);
@@ -47,14 +48,22 @@ const Review = ({ id, service }) => {
         </h1>
       </div>
       <>
-        {reviews.length ? (
-          <div className="grid md:grid-cols-3 gap-4">
-            {reviews.map((review) => (
-              <UserReview key={review._id} userReviews={review} />
-            ))}
+        {loading ? (
+          <div className="flex justify-center items-center mx-auto h-96">
+            <Spinner aria-label="Warning spinner example" size="xl" />
           </div>
         ) : (
-          <p className="text-2xl text-center">No Reviews were added.</p>
+          <div>
+            {reviews.length ? (
+              <div className="grid md:grid-cols-3 gap-4">
+                {reviews.map((review) => (
+                  <UserReview key={review._id} userReviews={review} />
+                ))}
+              </div>
+            ) : (
+              <p className="text-2xl text-center">No Reviews were added.</p>
+            )}
+          </div>
         )}
       </>
       {!user?.uid && (

@@ -66,7 +66,7 @@ const Service = ({ service }) => {
       </div>
       <div>
         <p className="text-lg font-semibold">Description</p>
-        <span>{description}</span>
+        <span>{description.slice(0, 100).concat("...")}</span>
       </div>
       <div className="flex items-center justify-between">
         <span className="text-3xl font-bold text-gray-900 dark:text-white">

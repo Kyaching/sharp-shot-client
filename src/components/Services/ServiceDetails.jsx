@@ -1,5 +1,4 @@
 import { Rating } from "flowbite-react";
-import React from "react";
 import { useLoaderData } from "react-router-dom";
 import Review from "../Review/Review";
 
@@ -32,12 +31,7 @@ const ServiceDetails = () => {
           <h5 className="mb-3 text-3xl font-extrabold leading-none sm:text-4xl">
             {name}
           </h5>
-          <p className="mb-5 text-gray-800">
-            <span className="font-bold">Lorem ipsum</span> dolor sit amet,
-            consectetur adipiscing elit. Etiam sem neque, molestie sit amet
-            venenatis et, dignissim ut erat. Sed aliquet velit id dui eleifend,
-            sed consequat odio sollicitudin.
-          </p>
+          <p className="mb-5 text-gray-800">{description}</p>
           <div className="flex items-center justify-between">
             <p className="text-3xl font-bold text-gray-900 dark:text-white">
               ${price}

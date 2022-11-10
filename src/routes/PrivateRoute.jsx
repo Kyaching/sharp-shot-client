@@ -8,7 +8,7 @@ const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const location = useLocation();
 
-  if (loading) {
+  if (loading && !user) {
     return (
       <div className="flex justify-center items-center mx-auto h-96">
         <Spinner aria-label="Warning spinner example" size="xl" />

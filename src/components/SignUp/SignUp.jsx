@@ -47,7 +47,6 @@ const SignUp = () => {
           setLoading(false);
           reset();
         }
-        navigate("/");
       })
       .catch((err) => {
         setLoading(false);
@@ -62,10 +61,11 @@ const SignUp = () => {
     };
     profileUpdate(profile)
       .then(() => {
-        setUser(user);
         if (profile) {
           toast.success("Profile Updated");
         }
+        setUser(user);
+        navigate("/");
       })
       .catch((err) => toast.error(err.message));
   };

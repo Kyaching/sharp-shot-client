@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar, Button, Navbar } from "flowbite-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
@@ -54,14 +54,31 @@ const Header = () => {
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-        <Link to="/">Home</Link>
-        <Link to="/services">Services</Link>
-        <Link to="/blog">Blog</Link>
+        <NavLink to="/" className="px-5 py-3 rounded hover:bg-gray-200">
+          Home
+        </NavLink>
+
+        <Link to="/services" className="px-5 py-3 rounded hover:bg-gray-200">
+          Services
+        </Link>
+        <Link to="/blog" className="px-5 py-3 rounded hover:bg-gray-200">
+          Blog
+        </Link>
         {user?.uid && (
           <>
             {" "}
-            <Link to="/myreviews">My Reviews</Link>
-            <Link to="/addservice">Add Service</Link>
+            <Link
+              to="/myreviews"
+              className="px-5 py-3 rounded hover:bg-gray-200"
+            >
+              My Reviews
+            </Link>
+            <Link
+              to="/addservice"
+              className="px-5 py-3 rounded hover:bg-gray-200"
+            >
+              Add Service
+            </Link>
           </>
         )}
       </Navbar.Collapse>
