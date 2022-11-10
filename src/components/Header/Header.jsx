@@ -54,31 +54,60 @@ const Header = () => {
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-        <NavLink to="/" className="px-5 py-3 rounded hover:bg-gray-200">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? "bg-purple-500 px-5 py-3 rounded text-white"
+              : "px-5 py-3 rounded hover:bg-gray-200"
+          }
+        >
           Home
         </NavLink>
 
-        <Link to="/services" className="px-5 py-3 rounded hover:bg-gray-200">
+        <NavLink
+          to="/services"
+          className={({ isActive }) =>
+            isActive
+              ? "bg-purple-500 px-5 py-3 rounded text-white"
+              : "px-5 py-3 rounded hover:bg-gray-200"
+          }
+        >
           Services
-        </Link>
-        <Link to="/blog" className="px-5 py-3 rounded hover:bg-gray-200">
+        </NavLink>
+        <NavLink
+          to="/blog"
+          className={({ isActive }) =>
+            isActive
+              ? "bg-purple-500 px-5 py-3 rounded text-white"
+              : "px-5 py-3 rounded hover:bg-gray-200"
+          }
+        >
           Blog
-        </Link>
+        </NavLink>
         {user?.uid && (
           <>
             {" "}
-            <Link
+            <NavLink
               to="/myreviews"
-              className="px-5 py-3 rounded hover:bg-gray-200"
+              className={({ isActive }) =>
+                isActive
+                  ? "bg-purple-500 px-5 py-3 rounded text-white"
+                  : "px-5 py-3 rounded hover:bg-gray-200"
+              }
             >
               My Reviews
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to="/addservice"
-              className="px-5 py-3 rounded hover:bg-gray-200"
+              className={({ isActive }) =>
+                isActive
+                  ? "bg-purple-500 px-5 py-3 rounded text-white"
+                  : "px-5 py-3 rounded hover:bg-gray-200"
+              }
             >
               Add Service
-            </Link>
+            </NavLink>
           </>
         )}
       </Navbar.Collapse>
