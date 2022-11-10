@@ -11,7 +11,7 @@ const Home = () => {
   const [services, setServices] = useState([]);
   let page = 3;
   useEffect(() => {
-    fetch(`http://localhost:5000/services?page=${page}`)
+    fetch(`https://photography-review-server.vercel.app/services?page=${page}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
@@ -24,12 +24,12 @@ const Home = () => {
   return (
     <div>
       <Helmet>
-        <title>Home</title>
+        <title>Sharp Shot - Home</title>
       </Helmet>
       <Slider />
       <div className="my-12">
         <h1 className="text-5xl text-center font-bold">My Services</h1>
-        <div className="grid grid-cols-3 gap-4 m-5">
+        <div className="grid md:grid-cols-3 gap-4 m-5">
           {services.map((service) => (
             <Service key={service._id} service={service} />
           ))}

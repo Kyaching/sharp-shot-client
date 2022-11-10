@@ -15,11 +15,14 @@ const Review = ({ id, service }) => {
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?serviceId=${id}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
+    fetch(
+      `https://photography-review-server.vercel.app/reviews?serviceId=${id}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    )
       .then((res) => {
         if (res.status === 401 || res.status === 403) {
           return userSignOut();
@@ -38,21 +41,29 @@ const Review = ({ id, service }) => {
       <Helmet>
         <title>Review</title>
       </Helmet>
-      <div className="relative">
-        <h1 className="text-5xl text-center my-6">User Review</h1>
-        {!user?.uid && (
-          <Link to="/login">
-            <Button className="absolute right-0 top-0">
-              Please Login to add Review
-            </Button>
-          </Link>
+      <div>
+        <h1 className="text-5xl text-center font-bold border-b pb-3 my-6">
+          User Review
+        </h1>
+      </div>
+      <>
+        {reviews.length ? (
+          <div className="grid md:grid-cols-3 gap-4">
+            {reviews.map((review) => (
+              <UserReview key={review._id} userReviews={review} />
+            ))}
+          </div>
+        ) : (
+          <p className="text-2xl text-center">No Reviews were added.</p>
         )}
-      </div>
-      <div className="grid grid-cols-3 gap-4">
-        {reviews.map((review) => (
-          <UserReview key={review._id} userReviews={review} />
-        ))}
-      </div>
+      </>
+      {!user?.uid && (
+        <Link to="/login">
+          <Button gradientMonochrome="teal" className="mx-auto mt-16">
+            Please Sign In to add Review
+          </Button>
+        </Link>
+      )}
       {user?.uid && <AddReview user={user} id={id} service={service} />}
     </div>
   );

@@ -11,7 +11,7 @@ const Services = () => {
   const [loading, setLoading] = useState(true);
   let page = count;
   useEffect(() => {
-    fetch(`http://localhost:5000/services?page=${page}`)
+    fetch(`https://photography-review-server.vercel.app/services?page=${page}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
@@ -26,9 +26,9 @@ const Services = () => {
   return (
     <>
       {!loading ? (
-        <div className="grid grid-cols-3 gap-4 m-5">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 m-5">
           <Helmet>
-            <title>Services</title>
+            <title>Sharp Shot - Services</title>
           </Helmet>
           {services.map((service) => (
             <Service key={service._id} service={service} />

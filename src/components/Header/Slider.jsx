@@ -8,7 +8,7 @@ import image5 from "../../assets/5.png";
 
 const Slider = () => {
   return (
-    <div className="sm:h-64 md:h-[500px] mt-10 w-4/5 shadow-xl mx-auto">
+    <div className="h-64 md:h-[500px] mt-10 w-4/5 shadow-xl mx-auto">
       <Carousel>
         <img src={image1} alt="..." />
         <img src={image2} alt="..." />

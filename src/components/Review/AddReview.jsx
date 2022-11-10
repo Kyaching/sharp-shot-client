@@ -21,7 +21,7 @@ const AddReview = ({ user, id, service }) => {
       price,
       rating,
     };
-    fetch("http://localhost:5000/reviews", {
+    fetch("https://photography-review-server.vercel.app/reviews", {
       method: "POST",
       headers: {
         "content-type": "application/json",
